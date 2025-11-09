@@ -3,28 +3,28 @@ sudo dnf -y update
 sudo dnf -y install bind bind-utils
 
 interface2=$(ip -brief addr | grep UP | sed -n '2p' | awk '{print $1}')
-  echo "Escolha a tua rede:"
+  echo "Identify your network in the format xxx.xxx.xxx.xxx./yy"
   read rede
 
-	echo "Escolha o teu ip:"
+	echo "Identify your IP in the format xxx.xxx.xxx.xxx./yy"
 	read ip
 
 	#Inserir Gateway
-	echo "Defina o gateway:"
+	echo "Identify your gateway in the format xxx.xxx.xxx.xxx:"
 	read gateway
 
 	#Inserir DNS
-	echo "Escolha o teu DNS:"
+	echo "Identify your Dns adress in the format xxx.xxx.xxx.xxx:"
 	read dns
 
     sudo ip link set "$interface2" up
     sudo ip addr add "$ip" dev "$interface2"
     sudo ip route add default via "$gateway"
 
-    echo "Qual é o teu domínio?"
+    echo "What is your Domain?"
     read domain
 
-    echo " Que nome pretenedes dar à rede interna? (ex: internal-network) "
+    echo "What name is your internal network? (ex: internal-network) "
     read rede_interna
 
     octet1=$(echo "$ip" | cut -d'.' -f1)
